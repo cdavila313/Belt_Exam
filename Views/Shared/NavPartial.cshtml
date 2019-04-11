@@ -1,0 +1,23 @@
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+            <a class="navbar-brand" asp-action="Index" asp-controller="Activity">Activity Center</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a asp-action="ActivityForm" asp-controller="Activity">New Activity</a></li>    
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            @{
+                if(@ViewBag.UserName != null)
+                {
+                    <li><p class="navbar-text">Welcome @ViewBag.UserName!</p></li>
+                }
+                else
+                {
+                    <li><p class="navbar-text"></p></li>
+
+                }
+            }            <li><a asp-action="Logout" asp-controller="Login"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            </ul>
+        </div>
+    </nav>

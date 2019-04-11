@@ -1,0 +1,50 @@
+﻿<partial name="NavPartial"/>
+
+@model List<Activity>
+
+<div class = "container">
+    <h1>Welcome To The Activity Center</h1>
+    <table class="table table-hover">
+        <tbody>
+            <thead>
+                <th>Activity</th>
+                <th>Date and Time</th>
+                <th>Duration</th>
+                <th>Event Coordinator</th>
+                <th>Number of Participants</th>
+                <th>Actions</th>
+            </thead>
+            @foreach(var activity in Model)
+            {
+            <tr>
+                <td><a asp-action="ShowActivity" asp-controller="Activity" asp-route-activityId="@activity.ActivityId">@activity.Name</a></td>
+                <td>@activity.DateAndTime</td>
+                <td>@activity.Duration @activity.DurationType</td>
+                <td>@activity.Planner.Name</td>
+                <td>@activity.Responses.Count</td>
+                @{
+                    if(ViewBag.CurrentUser.UserId == activity.UserId)
+                    {
+                        <td><a asp-action="DeleteActivity" asp-controller="Activity" asp-route-activityId="@activity.ActivityId">Delete</a></td>
+                    }
+                    else if(activity.Responses.Any(r => r.UserId == ViewBag.CurrentUser.UserId))
+                    {
+                        <td><a asp-action="NotGoing" asp-controller="Response" asp-route-activityId="@activity.ActivityId">Not Going</a></td>
+                    }
+                    else{
+                        <td><a asp-action="Going" asp-controller="Response" asp-route-activityId="@activity.ActivityId">Going</a></td>
+                    }
+                }
+
+            </tr>
+            }
+        </tbody>
+    </table>
+    @{
+        if(@ViewBag.ErrorMessage != null)
+        {
+            <h4>@ViewBag.ErrorMessage</h4>
+        }
+    }
+    <a asp-action="ExpiredActivities" asp-controller="Activity"><button>Show Expired Activities</button></a>
+</div>

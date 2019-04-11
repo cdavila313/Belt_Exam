@@ -1,0 +1,29 @@
+<partial name="NavPartial"/>
+@model Activity
+
+<div class = "container">
+    <h1>@Model.Name</h1>
+    <h3>Activity Coordinator: @Model.Planner.Name</h3>
+    <h3>Date: @Model.DateAndTime</h3>
+    <h3>Description: @Model.Description</h3>
+    <h3>Participants</h3>
+    @foreach(var userGoing in @Model.Responses)
+    {
+        <p>-@userGoing.User.Name</p>
+    }
+
+    @{
+        if(ViewBag.CurrentUser.UserId == @Model.UserId)
+        {
+            <button><a asp-action="DeleteActivity" asp-controller="Activity" asp-route-activityId="@Model.ActivityId">Delete</a></button>
+        }
+        
+        else if(@Model.Responses.Any(r => r.UserId == ViewBag.CurrentUser.UserId))
+        {
+            <button><a asp-action="NotGoing" asp-controller="Response" asp-route-activityId="@Model.ActivityId">Not Going</a></button>
+        }
+        else{
+            <button><a asp-action="Going" asp-controller="Response" asp-route-activityId="@Model.ActivityId">Going</a></button>
+        }
+    }
+</div>

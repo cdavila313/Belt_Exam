@@ -1,0 +1,25 @@
+    <form asp-action = 'AddUser' asp-controller="Login" method = "post">
+        @model User
+        <div class="form-group">
+            <label asp-for="Name">Name:</label>
+            <span asp-validation-for="Name"></span>
+            <input type= "text" class="form-control" name="Name" asp-for="Name" placeholder="Enter Name">
+        </div> 
+        <div class="form-group">
+            <label asp-for="Email">Email:</label>
+            <span asp-validation-for="Email"></span>
+            <input type= "text" class="form-control" name="Email" asp-for="Email" placeholder="Email">
+        </div> 
+        <div class="form-group">
+            <label asp-for="Password">Password:</label>
+            <span asp-validation-for="Password"></span>
+            <input type= "password" class="form-control" name="Password" asp-for="Password" placeholder="Enter Password">
+        </div> 
+        <div class="form-group">
+            <label asp-for="PasswordConfirmation">Password Confirmation:</label>
+            <span asp-validation-for="PasswordConfirmation"></span>
+            <input type= "password" class="form-control" name="PasswordConfirmation" asp-for="PasswordConfirmation" placeholder="Enter Password">
+            <p>Password must: Contain atleast 8 characters, 1 letter, 1 number, and 1 special character. </p>
+        </div>    
+        <input type="submit" value="Add User">
+    </form>

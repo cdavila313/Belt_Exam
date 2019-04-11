@@ -1,0 +1,27 @@
+<partial name="NavPartial"/>
+<div class = "container">
+    <h1>Expired Activities</h1>
+    @model List<Activity>
+
+    <table class="table table-hover">
+        <tbody>
+            <thead>
+                <th>Activity</th>
+                <th>Date and Time</th>
+                <th>Duration</th>
+                <th>Event Coordinator</th>
+                <th>Number of Participants</th>
+            </thead>
+            @foreach(var activity in Model)
+            {
+            <tr>
+                <td><a asp-action="ShowActivity" asp-controller="Activity" asp-route-activityId="@activity.ActivityId">@activity.Name</a></td>
+                <td>@activity.DateAndTime</td>
+                <td>@activity.Duration @activity.DurationType</td>
+                <td>@activity.Planner.Name</td>
+                <td>@activity.Responses.Count</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
